@@ -3,7 +3,7 @@ var express = require('express'), //returns a function
 		mongoose = require('mongoose'),
 		bodyParser = require('body-parser'),
 		apiRouter = require('./app/config/routes'),
-		DB = 'mongodb://localhost:27017/men-blog', // connects our local db on port 27017
+		DB = process.env.MONOGOLAB_URI || 'mongodb://localhost:27017/men-blog2', // connects our local db on port 27017, unless this app is on heroku, and finds env vars 
 		port = 3000;
 
 //body-parser config:
@@ -16,6 +16,6 @@ mongoose.connect( DB );
 //routes config // namespace for api
 app.use('/api', apiRouter);
 
-//server 
+//server
 app.listen(port);
 console.log('magic is happening on port ' + port);
